@@ -15,6 +15,7 @@ document.body.appendChild(renderer.domElement);
 document.body.appendChild( VRButton.createButton( renderer ) );
 
 const geometry = new THREE.BoxGeometry(1, 1, 1).toNonIndexed();
+
 const material = new THREE.MeshBasicMaterial({ vertexColors: true });
 const positionAttribute = geometry.getAttribute('position');
 const colors = [];
@@ -37,6 +38,9 @@ for (let i = 0; i < positionAttribute.count; i += 6) {
 geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
 const cube = new THREE.Mesh(geometry, material);
+
+//shift the cube forward a bit so we wont be in the cube position
+cube.position.set(0, 0, -3);
 scene.add(cube);
 
 camera.position.z = 5;
@@ -48,4 +52,11 @@ function animate() {
 }
 
 renderer.setAnimationLoop(animate);
+
+
+
+
+
+
+//https://stackoverflow.com/questions/49471653/in-three-js-while-using-webvr-how-do-i-move-the-camera-position
 
